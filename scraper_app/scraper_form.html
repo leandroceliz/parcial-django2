@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Buscador y Scraper{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Buscador Educativo (Scraping)</h2>
+
+<form method="post" class="mb-5">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-8">
+            {{ form.palabra_clave }}
+        </div>
+        <div class="col-md-4">
+            <button type="submit" name="buscar" class="btn btn-primary">Buscar</button>
+            <button type="submit" name="enviar_correo" class="btn btn-info">Enviar Resultados por Email</button>
+        </div>
+    </div>
+</form>
+
+<h3>Resultados de Búsqueda</h3>
+
+{% if resultados %}
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Título</th>
+                <th>Extracto</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resultado in resultados %}
+            <tr>
+                <td>{{ resultado.titulo }}</td>
+                <td>{{ resultado.extracto }}</td>
+                <td><a href="{{ resultado.url }}" target="_blank">Ver</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Ingresa una palabra clave para comenzar la búsqueda.</p>
+{% endif %}
+{% endblock %}

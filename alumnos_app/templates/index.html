@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Página Principal{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5 text-center">
+        <h1 class="display-5 fw-bold">Bienvenido al Parcial de Django</h1>
+        <p class="col-md-8 fs-4 mx-auto">
+            Este proyecto cumple con los requisitos de Login, Registro, Dashboard de Alumnos, Generación de PDF y Scraping.
+        </p>
+        <hr class="my-4">
+        {% if user.is_authenticated %}
+            <p class="fs-5">¡Hola, {{ user.username }}! Dirígete a tu Dashboard para comenzar.</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'dashboard' %}" role="button">Ir al Dashboard</a>
+        {% else %}
+            <p class="fs-5">Para empezar, por favor regístrate o inicia sesión.</p>
+            <a class="btn btn-success btn-lg me-3" href="{% url 'registro' %}" role="button">Registro</a>
+            <a class="btn btn-outline-secondary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

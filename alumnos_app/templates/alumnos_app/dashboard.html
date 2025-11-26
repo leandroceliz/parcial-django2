@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard de Alumnos{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Dashboard de Alumnos</h2>
+<p class="text-muted">Bienvenido, {{ user.username }}. Aquí están los alumnos que has registrado.</p>
+
+<a href="{% url 'alumno_crear' %}" class="btn btn-success mb-3">
+    + Crear Nuevo Alumno
+</a>
+
+{% if alumnos %}
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Legajo</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+       <tbody>
+    {% for alumno in alumnos %}
+        <tr>
+            <td>{{ alumno.nombre }}</td>
+            <td>{{ alumno.apellido }}</td>
+            <td>{{ alumno.legajo }}</td>
+            <td>
+                {# Enlazar el boton a la URL 'generar_pdf' con el ID del alumno #}
+                <a href="{% url 'generar_pdf' alumno.pk %}" class="btn btn-sm btn-info">Enviar PDF por correo</a>
+                
+                {# Opcional: Aqui irian botones de Editar/Eliminar #}
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+    </table>
+{% else %}
+    <div class="alert alert-info" role="alert">
+        Aún no tienes alumnos registrados. ¡Comienza creando uno!
+    </div>
+{% endif %}
+{% endblock %}
