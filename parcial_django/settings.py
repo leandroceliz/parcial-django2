@@ -46,13 +46,14 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    
 ]
 
 ROOT_URLCONF = 'parcial_django.urls'
@@ -139,9 +140,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 if not DEBUG: # Solo aplicar en producción
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST = "smtp-relay.brevo.com"#'smtp.ejemplo.com'  # Ej. smtp.sendgrid.net o smtp.gmail.com
     EMAIL_PORT = 587 # Puerto estandar TLS
     EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = os.environ.get('EMAIL_USER') # Tu usuario de SMTP
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS') # Tu contraseña de SMTP
-    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+    EMAIL_HOST_USER = os.environ.get('9ca0f6001@smtp-brevo.com') # Tu usuario de SMTP
+    EMAIL_HOST_PASSWORD = os.environ.get('W78p2t3DP1cvd9q4') # Tu contraseña de SMTP
+    DEFAULT_FROM_EMAIL = 'no-reply@tudominio.com'
